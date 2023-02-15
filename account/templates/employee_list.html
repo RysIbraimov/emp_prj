@@ -203,6 +203,7 @@
                       <th>Job</th>
                       <th>Delete</th>
                       <th>Detail</th>
+                      <th>Update</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -218,6 +219,9 @@
                       </td>
                       <td>
                         <a href="{% url 'employee_detail' pk=emp.id %}"><button type="button" class="btn btn-info">Detail</button></a>
+                      </td>
+                      <td>
+                        <a href="{% url 'employee_update' pk=emp.id %}"><button type="button" class="btn btn-info">Update</button></a>
                       </td>
                     </tr>
                     {% endfor %}

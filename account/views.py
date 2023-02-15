@@ -1,6 +1,5 @@
-from django.http import FileResponse
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView,DeleteView
+from django.views.generic import ListView, DetailView, CreateView, DeleteView,UpdateView
 
 from .forms import EmployeeForm
 from .models import Employee
@@ -13,11 +12,13 @@ class EmployeeCreateView(CreateView):
     context_object_name = 'employees'
     success_url = reverse_lazy('employee_list')
 
+
 class EmployeeList(ListView):
     model = Employee
     form_class = EmployeeForm
     template_name = 'employee_list.html'
     context_object_name = 'employees'
+
 
 class EmployeeDetail(DetailView):
     model = Employee
@@ -25,8 +26,6 @@ class EmployeeDetail(DetailView):
     template_name = 'employee_detail.html'
     context_object_name = 'employee'
 
-    # def render_to_response(self, context, **kwargs):
-    #     return FileResponse(self.object.main_image)
 
 class EmployeeDelete(DeleteView):
     model = Employee
@@ -36,10 +35,10 @@ class EmployeeDelete(DeleteView):
     success_url = reverse_lazy('employee_list')
 
 
-
-
-
-
-
-
-
+class EmployeeUpdate(UpdateView):
+    model = Employee
+    fields = '__all__'
+    dorm_class = EmployeeForm
+    template_name = 'employee_update.html'
+    context_object_name = 'employee'
+    success_url = reverse_lazy('employee_list')

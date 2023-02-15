@@ -13,3 +13,4 @@ class EmployeeForm(forms.ModelForm):
             'job': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'job'}),
             'main_image': forms.FileInput(attrs={'class': 'form-control', 'placeholder': 'Image'}),
         }
+
