@@ -10,8 +10,8 @@ urlpatterns = [
 
     path('', views.EmployeeList.as_view(), name='employee_list'),
     path('create/', views.EmployeeCreateView.as_view(), name='employee_create'),
-    # path('create/', views.create_user,name='employee_create' ),
-    path('list/<int:pk>/', views.EmployeeDetail.as_view(), name='employee_detail'),
+    path('<int:pk>/', views.EmployeeDetail.as_view(), name='employee_detail'),
+    path('delete/<int:pk>/', views.EmployeeDelete.as_view(), name='employee_delete'),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

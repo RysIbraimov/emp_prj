@@ -4,7 +4,8 @@
   {% load static %}
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Simple Tables</title>
+  <title>AdminLTE 3 | Delete</title>
+
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
   <!-- Font Awesome -->
@@ -13,6 +14,7 @@
   <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
 </head>
 <body class="hold-transition sidebar-mini">
+<!-- Site wrapper -->
 <div class="wrapper">
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -24,9 +26,7 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="../../index3.html" class="nav-link">Home</a>
       </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
+      <a href="{% url 'employee_list' %}"><button type="button" class="btn btn-info">List</button></a>
     </ul>
 
     <!-- Right navbar links -->
@@ -52,6 +52,7 @@
           </form>
         </div>
       </li>
+
       <!-- Messages Dropdown Menu -->
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
@@ -72,7 +73,6 @@
                 <p class="text-sm text-muted"><i class="far fa-clock mr-1"></i> 4 Hours Ago</p>
               </div>
             </div>
-
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
@@ -159,85 +159,27 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Simple Tables</h1>
+            <h1>Delete</h1>
           </div>
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Simple Tables</li>
+              <li class="breadcrumb-item active">Contact us</li>
             </ol>
           </div>
         </div>
       </div><!-- /.container-fluid -->
     </section>
 
-
-        <div class="row">
-          <div class="col-12">
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Responsive Hover Table</h3>
-
-                <div class="card-tools">
-                  <div class="input-group input-group-sm" style="width: 150px;">
-                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
-
-                    <div class="input-group-append">
-                      <button type="submit" class="btn btn-default">
-                        <i class="fas fa-search"></i>
-                      </button>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <!-- /.card-header -->
-              <div class="card-body table-responsive p-0">
-                <table class="table table-hover text-nowrap">
-                  <thead>
-                  <th scope="col"><a href="{% url 'employee_create' %}"><button type="button" class="btn btn-block btn-success">Create</button></a></th>
-                    <tr>
-                      <th>Name</th>
-                      <th>Education</th>
-                      <th>Location</th>
-                      <th>Age</th>
-                      <th>Job</th>
-                      <th>Delete</th>
-                      <th>Detail</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                  {% for emp in employees %}
-                    <tr>
-                     <td> <a class="dropdown-item" href="{% url 'employee_detail' pk=emp.id  %}">{{ emp.name }}</a></td>
-                      <td>{{ emp.education }}</td>
-                      <td>{{ emp.location }}</td>
-                      <td>{{ emp.age }}</td>
-                      <td>{{ emp.job }}</td>
-                      <td>
-                        <a href="{% url 'employee_delete' pk=emp.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
-                      </td>
-                      <td>
-                        <a href="{% url 'employee_detail' pk=emp.id %}"><button type="button" class="btn btn-info">Detail</button></a>
-                      </td>
-                    </tr>
-                    {% endfor %}
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-            </div>
-            <!-- /.card -->
-          </div>
-        </div>
+    <!-- Main content -->
+    <h3>Delete employee: {{ employee.name }}?</h3>
+        <form method="post">{% csrf_token %}
+         <p>Are you sure you want to delete "{{ object }}"?</p>
+         <input class="btn btn-danger" type="submit" value="Confirm">
+      </form>
   </div>
-
   <!-- /.content-wrapper -->
-  <footer class="main-footer">
-    <div class="float-right d-none d-sm-block">
-      <b>Version</b> 3.2.0
-    </div>
-    <strong>Copyright &copy; 2014-2021 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
-  </footer>
+
 
   <!-- Control Sidebar -->
   <aside class="control-sidebar control-sidebar-dark">
