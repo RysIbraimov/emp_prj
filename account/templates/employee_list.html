@@ -27,6 +27,18 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
+      {% if request.user.is_authenticated %}
+      <li class="nav-item d-none d-sm-inline-block">
+       <h3>{{request.user.username}}</h3>
+      </li>
+       <a href="{% url 'logout_user' %}"><button type="button" class="btn btn-block btn-outline-warning">Logout</button></a>
+
+      {% else %}
+      <a href="{% url 'user_register' %}"><button type="button" class="btn btn-block btn-outline-primary">Register</button></a>
+      <li class="nav-item d-none d-sm-inline-block">
+      <a href="{% url 'login_user' %}"><button type="button" class="btn btn-block btn-outline-success">Login</button></a>
+      </li>
+      {% endif %}
     </ul>
 
     <!-- Right navbar links -->

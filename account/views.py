@@ -37,8 +37,8 @@ class EmployeeDelete(DeleteView):
 
 class EmployeeUpdate(UpdateView):
     model = Employee
-    fields = '__all__'
-    dorm_class = EmployeeForm
+    # fields = '__all__'
+    form_class = EmployeeForm
     template_name = 'employee_update.html'
     context_object_name = 'employee'
     success_url = reverse_lazy('employee_list')
