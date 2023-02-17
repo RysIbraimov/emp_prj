@@ -37,7 +37,6 @@ class EmployeeDelete(DeleteView):
 
 class EmployeeUpdate(UpdateView):
     model = Employee
-    # fields = '__all__'
     form_class = EmployeeForm
     template_name = 'employee_update.html'
     context_object_name = 'employee'
