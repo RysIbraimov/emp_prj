@@ -1,40 +1,18 @@
+from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
 from django import forms
-from django.core.exceptions import ValidationError
 
-from .models import User
 
-class UserForm(forms.ModelForm):
-    # password_confirm = forms.CharField(max_length=10)
+class RegisterUserForm(UserCreationForm):
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
     class Meta:
         model = User
-        fields = ['username', 'email','password']
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'username'}),
-            'email': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'email'}),
-            'password': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'password'}),
-            # 'password_confirm': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'password_confirm'}),
+        fields = ('username', 'email', 'password1', 'password2')
 
-        }
+    def __init__(self, *args, **kwargs):
+        super(RegisterUserForm, self).__init__(*args, **kwargs)
 
-        # def clean(self):
-        #     cleaned_data = super().clean()
-        #     password = cleaned_data.get("password")
-        #     password_confirm = cleaned_data.get("password_confirm")
-        #
-        #     if password != password_confirm:
-        #         raise ValidationError('Пароли должны совподать!')
-        #     else:
-        #         return password
-
-
-
-class UserLoginForm(forms.ModelForm):
-
-    class Meta:
-        model = User
-        fields = ['username', 'password']
-        widgets = {
-            'username': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'username'}),
-            'password': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'password'}),
-        }
+        self.fields['username'].widget.attrs['class'] = 'form-control'
+        self.fields['password1'].widget.attrs['class'] = 'form-control'
+        self.fields['password2'].widget.attrs['class'] = 'form-control'

@@ -27,6 +27,8 @@
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>
       </li>
+
+
       {% if request.user.is_authenticated %}
       <li class="nav-item d-none d-sm-inline-block">
        <h3>{{request.user.username}}</h3>
@@ -40,6 +42,7 @@
       </li>
       {% endif %}
     </ul>
+
 
     <!-- Right navbar links -->
     <ul class="navbar-nav ml-auto">
@@ -106,6 +109,7 @@
           <div class="dropdown-divider"></div>
           <a href="#" class="dropdown-item">
             <!-- Message Start -->
+
             <div class="media">
               <img src="../../dist/img/user3-128x128.jpg" alt="User Avatar" class="img-size-50 img-circle mr-3">
               <div class="media-body">
@@ -206,16 +210,20 @@
               <div class="card-body table-responsive p-0">
                 <table class="table table-hover text-nowrap">
                   <thead>
+                  {% if request.user.is_authenticated %}
                   <th scope="col"><a href="{% url 'employee_create' %}"><button type="button" class="btn btn-block btn-success">Create</button></a></th>
+                  {% endif %}
                     <tr>
                       <th>Name</th>
                       <th>Education</th>
                       <th>Location</th>
                       <th>Age</th>
                       <th>Job</th>
+                      {% if request.user.is_authenticated %}
                       <th>Delete</th>
                       <th>Detail</th>
                       <th>Update</th>
+                      {% endif %}
                     </tr>
                   </thead>
                   <tbody>
@@ -226,6 +234,7 @@
                       <td>{{ emp.location }}</td>
                       <td>{{ emp.age }}</td>
                       <td>{{ emp.job }}</td>
+                      {% if request.user.is_authenticated %}
                       <td>
                         <a href="{% url 'employee_delete' pk=emp.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
                       </td>
@@ -235,6 +244,7 @@
                       <td>
                         <a href="{% url 'employee_update' pk=emp.id %}"><button type="button" class="btn btn-info">Update</button></a>
                       </td>
+                      {% endif %}
                     </tr>
                     {% endfor %}
                   </tbody>
